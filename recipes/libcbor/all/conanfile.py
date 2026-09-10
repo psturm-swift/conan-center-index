@@ -18,14 +18,12 @@ class LibCborStackConan(ConanFile):
     options = {
         "shared": [True, False],
         "fPIC": [True, False],
-        "custom_alloc": [True, False],
         "pretty_printer": [True, False],
         "buffer_growth_factor": ["ANY"],
     }
     default_options = {
         "shared": False,
         "fPIC": True,
-        "custom_alloc": False,
         "pretty_printer": True,
         "buffer_growth_factor": 2,
     }
@@ -57,7 +55,6 @@ class LibCborStackConan(ConanFile):
         tc = CMakeToolchain(self)
         tc.variables["WITH_EXAMPLES"] = False
         tc.variables["SANITIZE"] = False
-        tc.variables["CBOR_CUSTOM_ALLOC"] = self.options.custom_alloc
         tc.variables["CBOR_PRETTY_PRINTER"] = self.options.pretty_printer
         tc.variables["CBOR_BUFFER_GROWTH"] = self.options.buffer_growth_factor
         # Relocatable shared libs on macOS
